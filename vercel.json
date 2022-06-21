@@ -1,0 +1,14 @@
+{
+    "builds":[
+        {
+            "src":"./Backend/Queries.js",
+            "use":"@vercel/node"
+        }
+    ],
+    "routes":[
+        {
+            "src":"./Backend",
+            "dest":"Queries.js"
+        }
+    ]
+}
