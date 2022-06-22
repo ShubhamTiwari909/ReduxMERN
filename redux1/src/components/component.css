@@ -39,6 +39,15 @@
         inset 0px 14px 28px hsl(120deg, 20%, 95%);
 }
 
-.email{
-    overflow-wrap: break-word;
+.searchInput {
+    border: none;
+    background-color: transparent;
+    outline: 0;
+    border-bottom: 1px solid white;
+}
+
+.searchInput:focus {
+    border-image-slice: 1;
+    border-width: 1px;
+    border-image-source: linear-gradient(to left, #47f58f, #44caf7);
 }

@@ -7,7 +7,10 @@ import axios from 'axios'
 import './component.css'
 
 function Home() {
-  const [data, setData] = useState([])
+  const [data, setData] = useState([]);
+  const [searchName, setSearchName] = useState("");
+  const [searchNumber, setSearchNumber] = useState("");
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -21,7 +24,6 @@ function Home() {
 
   const contacts = useSelector(state => state);
 
-
   const deleteContact = (id) => {
     if (window.confirm("Are you sure you want to delete this contact? \n press ok to delete and press cancel to cancel the operation ")) {
       dispatch({ type: "DELETE_CONTACT", payload: id });
@@ -29,8 +31,20 @@ function Home() {
     }
   }
 
+
+
   return (
     <div className='bodyBackground'>
+      <div className='grid grid-cols-2 gap-5 justify-center my-5 space-y-3'>
+        <div className="grid place-content-center">
+          <label className='text-white bg-black px-4 py-1 rounded'>Search by Name</label>
+          <input type="text" className="searchInput" value={searchName} onChange={e => setSearchName(e.target.value)} />
+        </div>
+        <div className="grid place-content-center">
+          <label className='text-white bg-black px-4 py-1 rounded'>Search by Number</label>
+          <input type="number" className="searchInput" value={searchNumber} onChange={e => setSearchNumber(e.target.value)} />
+        </div>
+      </div>
       <p className="my-4 text-3xl text-center">User Details</p>
       <div className="grid justify-content-center">
         <Link to='/add' className="btn btn-primary my-6 justify-self-center" >Add</Link>
@@ -44,12 +58,22 @@ function Home() {
         </div>
         <div>
           {
-            contacts?.map((contact, index) => {
+            contacts?.filter(function (contact) {
+              if (searchName === "" && searchNumber === "") {
+                return contact
+              }
+              else if(contact.name.includes(searchName) && searchNumber === "") {
+                return contact.name.includes(searchName)
+              }
+              else{
+                return contact.number.includes(parseInt(searchNumber));
+              }
+            }).map((contact, index) => {
               return (
                 <div key={contact._id} className="grid grid-cols-5 gap-2 my-4 py-4 pl-2 bg-gradient-to-r from-purple-900 via-indigo-800 to-pink-900 
                 rounded-lg">
                   <h1>{index + 1}.</h1>
-                  <h1>{contact.name}</h1>
+                  <h1 className="capitalize">{contact.name}</h1>
                   <h1 className="break-words">{contact.email}</h1>
                   <h1>{contact.number}</h1>
                   <div className="space-x-3 flex flex-col md:block lg:block">
