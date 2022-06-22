@@ -30,11 +30,11 @@ function App() {
       <ToastContainer />
       <Navbar />
       <Routes>
-        <Route exact path='/home' element={
+        <Route exact path='/' element={
           <Home />
         } />
 
-        <Route path='/' element={
+        <Route path='/add' element={
           <Add />
         } />
 

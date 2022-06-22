@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
+import './component.css'
 
 function Edit() {
     const [name, setName] = useState("");
@@ -42,31 +43,31 @@ function Edit() {
         }
         dispatch({ type: "UPDATE_CONTACT", payload: data })
         toast.success("student update successfully😎");
-        navigation('/home')
+        navigation('/')
     }
 
     return (
-        <div>
+        <div className="my-4">
             {
                 currentContacts ?
                     <>
                         <h1 className="text-4xl text-center text-slate-800 font-bold">Edit Contact {currentContacts.name}</h1>
-                        <div className="grid place-content-center">
-                            <form onSubmit={handleSubmit}>
+                        <div className="grid place-content-center my-4">
+                            <form onSubmit={handleSubmit} className="w-purple-claymorphism">
                                 <div className="form-group">
-                                    <input type="text" className="form-control" placeholder="Name..."
+                                    <input type="text" className="form-control my-3" placeholder="Name..."
                                         value={name} onChange={e => setName(e.target.value)} />
                                 </div>
                                 <div className="form-group">
-                                    <input type="email" className="form-control" placeholder="Email..."
+                                    <input type="email" className="form-control my-3" placeholder="Email..."
                                         value={email} onChange={e => setEmail(e.target.value)} />
                                 </div>
                                 <div className="form-group">
-                                    <input type="number" className="form-control" placeholder="Phone..."
+                                    <input type="number" className="form-control my-3" placeholder="Phone..."
                                         value={number} onChange={e => setNumber(e.target.value)} />
                                 </div>
-                                <div className="form-group">
-                                    <input type="submit" className="btn bg-dark text-white" value="Update" />
+                                <div className="form-group my-6 space-x-4">
+                                    <input type="submit" className="btn bg-gradient-to-r from bg-indigo-500 via-purple-500 to-pink-500 text-white" value="Update" />
                                     <Link to='/home' className="btn btn-danger">Cancel</Link>
                                 </div>
                             </form>

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
-
+import './component.css'
 function Add() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -18,7 +18,7 @@ function Add() {
 
         const checkEmail = contacts.find(contact => contact.email === email);
 
-        const checkNumber = contacts.find(contact => contact.number === parseInt(number));
+        const checkNumber = contacts.find(contact => contact.number === number);
 
         if (!email || !number || !name) {
             return toast("Please fill all the fields");
@@ -37,24 +37,26 @@ function Add() {
         }
         dispatch({ type: "ADD_CONTACT", payload: data })
         toast.success("Saved successfully😎");
-        navigation('/home')
+        navigation('/')
     }
     return (
-        <div>
+        <div className="my-4">
             <h1 className="text-4xl text-center text-slate-800 font-bold">Add Contact</h1>
-            <div className="grid place-content-center">
-                <form onSubmit={handleSubmit}>
+            <div className="grid place-content-center my-5">
+                <form onSubmit={handleSubmit} className="w-blue-claymorphism">
                     <div className="form-group">
-                        <input type="text" className="form-control" placeholder="Name..." value={name} onChange={e => setName(e.target.value)} />
+                        <input type="text" className="form-control my-3" placeholder="Name..." value={name} onChange={e => setName(e.target.value)} />
                     </div>
                     <div className="form-group">
-                        <input type="email" className="form-control" placeholder="Email..." value={email} onChange={e => setEmail(e.target.value)} />
+                        <input type="email" className="form-control my-3" placeholder="Email..." value={email} onChange={e => setEmail(e.target.value)} />
                     </div>
                     <div className="form-group">
-                        <input type="number" className="form-control" placeholder="Phone..." value={number} onChange={e => setNumber(e.target.value)} />
+                        <input type="number" className="form-control my-3" placeholder="Phone..." value={number} onChange={e => setNumber(e.target.value)} />
                     </div>
                     <div className="form-group">
-                        <input type="submit" className="form-control" value="ADD" />
+                        <input type="submit"
+                            className="form-control my-6 bg-gradient-to-r from bg-indigo-500 via-purple-500 to-pink-500 text-white"
+                            value="ADD" />
                     </div>
                 </form>
 

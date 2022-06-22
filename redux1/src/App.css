@@ -11,3 +11,14 @@ body::-webkit-scrollbar-thumb {
     outline: 1px solid crimson;
     border-radius:15px;
 }
+
+.bodyBackground{
+    text-shadow: 2px 2px black;
+    height:100%;
+    padding: 3rem;
+    color: #ffffff;
+    background-image:url('./images/BodyBackground1.jpg');
+    background-repeat:no-repeat;
+    background-size:cover;
+    background-attachment: fixed;
+}

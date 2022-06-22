@@ -23,7 +23,7 @@ app.get("/Users", (req, res) => {
         const result = await userSchema.find({});
         res.send(result);
       } finally {
-        console.log("Data Fetched succefully");
+        
       }
     });
   };
