@@ -6,7 +6,7 @@ import { FcEditImage, FcDeleteDatabase } from 'react-icons/fc'
 import axios from 'axios'
 import './component.css'
 
-function Home() {
+function Home(props) {
   const [data, setData] = useState([]);
   const [searchName, setSearchName] = useState("");
   const [searchNumber, setSearchNumber] = useState("");
@@ -14,7 +14,7 @@ function Home() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    axios.get("http://localhost:3001/Users")
+    axios.get(`http://localhost:3001/Users/${props.loginState}`)
       .then((response) => {
         setData(response.data)
         dispatch({ type: "FETCH", payload: data })
@@ -22,7 +22,9 @@ function Home() {
       .catch((err) => console.log(err));
   }, [data, dispatch])
 
-  const contacts = useSelector(state => state);
+  
+
+  const contacts = useSelector(state => state.contact);
 
   const deleteContact = (id) => {
     if (window.confirm("Are you sure you want to delete this contact? \n press ok to delete and press cancel to cancel the operation ")) {
@@ -32,17 +34,16 @@ function Home() {
   }
 
 
-
   return (
     <div className='bodyBackground'>
       <div className='grid grid-cols-2 gap-5 justify-center my-5 space-y-3'>
         <div className="grid place-content-center">
           <label className='text-white bg-black px-4 py-1 rounded'>Search by Name</label>
-          <input type="text" className="searchInput" value={searchName} onChange={e => setSearchName(e.target.value)} />
+          <input type="text" className="searchInput text-green-300 font-bold" value={searchName} onChange={e => setSearchName(e.target.value)} />
         </div>
         <div className="grid place-content-center">
           <label className='text-white bg-black px-4 py-1 rounded'>Search by Number</label>
-          <input type="number" className="searchInput" value={searchNumber} onChange={e => setSearchNumber(e.target.value)} />
+          <input type="number" className="searchInput text-indigo-500 font-bold" value={searchNumber} onChange={e => setSearchNumber(e.target.value)} />
         </div>
       </div>
       <p className="my-4 text-3xl text-center">User Details</p>
@@ -62,10 +63,10 @@ function Home() {
               if (searchName === "" && searchNumber === "") {
                 return contact
               }
-              else if(contact.name.includes(searchName) && searchNumber === "") {
+              else if (contact.name.includes(searchName) && searchNumber === "") {
                 return contact.name.includes(searchName)
               }
-              else{
+              else {
                 return contact.number.includes(parseInt(searchNumber));
               }
             }).map((contact, index) => {

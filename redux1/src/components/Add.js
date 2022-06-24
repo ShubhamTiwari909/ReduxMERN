@@ -1,14 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
 import './component.css'
-function Add() {
+function Add(props) {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [number, setNumber] = useState("");
 
-    const contacts = useSelector((state) => state);
+    const contacts = useSelector((state) => state.contact);
     const dispatch = useDispatch();
 
     const navigation = useNavigate();
@@ -30,14 +30,17 @@ function Add() {
             return toast.error("This phone number already exists")
         }
 
+        const uniqueId = props.loginState.toString();
+
         const data = {
+            uniqueId,
             name,
             email,
             number
         }
         dispatch({ type: "ADD_CONTACT", payload: data })
         toast.success("Saved successfully😎");
-        navigation('/')
+        navigation('/home')
     }
     return (
         <div className="my-4">

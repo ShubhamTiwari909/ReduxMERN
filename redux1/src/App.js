@@ -1,46 +1,73 @@
-import React from 'react'
+import React, { useState,useEffect } from 'react'
 // Routing
-import { Routes, Route, useNavigate } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 
 // toast notification
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 
+import axios from 'axios';
+import {useDispatch} from 'react-redux'
+
 // custom components
 import Navbar from './components/Navbar'
+import LandingPage from './components/LandingPage'
 import Home from './components/Home'
 import Add from './components/Add'
 import Edit from './components/Edit'
+import Signup from './components/Signup'
+import Login from './components/Login'
+import ForgetPassword from './components/ForgetPassword'
+import Profile from './components/Profile'
 
 // css
 import './App.css'
 
 function App() {
-  const navigation = useNavigate();
+  const [loginCredential, setLoginCredential] = useState("");
+  const [loginState, setLoginState] = useState("");
+  const [loginShow, setLoginShow] = useState(false);
+  const [profile,setProfile] = useState("");
 
-  window.addEventListener("beforeunload", function () {
-    navigation.push('/')
+  // profile data setup here so that after first render the data will load using useEffect and in second render after the
+  // login process , the data gets in the store for the user
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    axios.get(`http://localhost:3001/SignupInfo/${loginState}`)
+      .then((response) => {
+        setProfile(response.data)
+        dispatch({ type: "FETCH_USER", payload: profile })
+      })
+      .catch((err) => console.log(err));
   })
-  window.removeEventListener("beforeunload", function () {
-    navigation.push('/')
-  })
+
+  
 
   return (
     <div>
       <ToastContainer />
-      <Navbar />
+      <Navbar setLoginState={setLoginState} loginShow={loginShow} setLoginShow={setLoginShow} />
       <Routes>
-        <Route exact path='/' element={
-          <Home />
+        <Route exact path={`${loginShow ? '/home' : '/'}`} element={
+          loginShow ? <Home loginState={loginState} /> : <LandingPage />
         } />
 
         <Route path='/add' element={
-          <Add />
+          <Add loginState={loginState} />
         } />
 
         <Route path='/edit/:id' element={
           <Edit />
         } />
+        <Route path='/signup/*' element={
+          <Signup />
+        } />
+        <Route path='/login/*' element={
+          <Login setLoginState={setLoginState} setLoginShow={setLoginShow} setLoginCredential={setLoginCredential} />
+        } />
+        <Route path='/forgetPassword/*' element={<ForgetPassword />}  />
+        <Route path='/profile' element={<Profile loginState={loginState} />}  />
       </Routes>
     </div>
   )

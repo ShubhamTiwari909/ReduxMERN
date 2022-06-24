@@ -11,7 +11,7 @@ function Edit() {
 
     const { id } = useParams()
 
-    const contacts = useSelector(state => state)
+    const contacts = useSelector(state => state.contact)
 
     const currentContacts = contacts.find(contact => contact._id === id);
 
@@ -43,7 +43,7 @@ function Edit() {
         }
         dispatch({ type: "UPDATE_CONTACT", payload: data })
         toast.success("student update successfully😎");
-        navigation('/')
+        navigation('/home')
     }
 
     return (
@@ -68,7 +68,7 @@ function Edit() {
                                 </div>
                                 <div className="form-group my-6 space-x-4">
                                     <input type="submit" className="btn bg-gradient-to-r from bg-indigo-500 via-purple-500 to-pink-500 text-white" value="Update" />
-                                    <Link to='/home' className="btn btn-danger">Cancel</Link>
+                                    <Link to='/' className="btn btn-danger">Cancel</Link>
                                 </div>
                             </form>
                           

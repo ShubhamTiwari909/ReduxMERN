@@ -3,7 +3,7 @@
 .w-blue-claymorphism,
 .w-red-claymorphism,
 .w-purple-claymorphism {
-    padding: 50px;
+    padding:30px 40px ;
     border-radius: 50px;
 }
 
@@ -50,4 +50,25 @@
     border-image-slice: 1;
     border-width: 1px;
     border-image-source: linear-gradient(to left, #47f58f, #44caf7);
+}
+
+
+.bodyBackground {
+    text-shadow: 2px 2px black;
+    height: 100%;
+    padding: 1rem 3rem 5rem 3rem;
+    color: #ffffff;
+    background-image: url('./images/BodyBackground1.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.LandingPage {
+    height: 86vh;
+    padding:5rem;
+    background-image: url('./images/LandingPage.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position:center;
 }
