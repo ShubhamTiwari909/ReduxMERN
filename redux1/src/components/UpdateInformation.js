@@ -11,6 +11,7 @@ function ForgetPassword() {
   const [email, setEmail] = useState("");
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  const [showPassword, setShowPassword] = useState("password");
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -37,6 +38,14 @@ function ForgetPassword() {
   const hanldeNewPassword = (e) => {
     setNewPassword(e.target.value);
   };
+  const hidePassword = () => {
+    if(showPassword === "password") {
+      setShowPassword("text")
+    }
+    else{
+      setShowPassword("password")
+    }
+  }
 
 
   //Registration function
@@ -74,8 +83,8 @@ function ForgetPassword() {
           <div className="w-full p-3 px-6 py-10">
             <div className="mt-3 relative">
             <div className="my-7 relative">
-                <span className="absolute p-1 bottom-8 ml-2 bg-white text-gray-400 ">New Username</span>
-                <input type="text" className="h-12 px-2 w-full border-2 rounded focus:outline-none focus:border-red-600"
+                <span className="absolute p-1 bottom-8 ml-2 bg-white text-gray-400 ">Email</span>
+                <input type="email" className="h-12 px-2 w-full border-2 rounded focus:outline-none focus:border-red-600"
                   name="email" value={email} onChange={hanldeEmail} />
               </div>
               <div className="my-7 relative">
@@ -87,14 +96,17 @@ function ForgetPassword() {
 
             <div className="my-7 relative">
               <span className="absolute p-1 bottom-8 ml-2 bg-white text-gray-400 ">Old Password</span>
-              <input type="password" className="h-12 px-2 w-full border-2 rounded focus:outline-none focus:border-red-600"
+              <input type={showPassword} className="h-12 px-2 w-full border-2 rounded focus:outline-none focus:border-red-600"
                 name="oldpassword" value={oldPassword} onChange={hanldeOldPassword} />
             </div>
 
             <div className="my-7 relative">
               <span className="absolute p-1 bottom-8 ml-2 bg-white text-gray-400 ">New Password</span>
-              <input type="password" className="h-12 px-2 w-full border-2 rounded focus:outline-none focus:border-red-600"
+              <input type={showPassword} className="h-12 px-2 w-full border-2 rounded focus:outline-none focus:border-red-600"
                 name="newpassword" value={newPassword} onChange={hanldeNewPassword} />
+            </div>
+            <div>
+              <span><input type="checkbox" onClick={hidePassword} /> Show password</span>
             </div>
 
             <div className="mt-4 flex justify-between">

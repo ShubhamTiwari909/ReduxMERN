@@ -10,6 +10,8 @@ function Login(props) {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("");
     const [profile, setProfile] = useState("");
+    const [showPassword, setShowPassword] = useState("password");
+
     const dispatch = useDispatch();
 
     const handleEmail = (e) => {
@@ -19,6 +21,14 @@ function Login(props) {
         setPassword(e.target.value)
     }
 
+    const hidePassword = () => {
+        if(showPassword === "password") {
+            setShowPassword("text")
+        }
+        else{
+            setShowPassword("password")
+        }
+    }
     const navigation = useNavigate();
 
     const login = (e) => {
@@ -58,13 +68,16 @@ function Login(props) {
                         type="email" placeholder="Email" value={email} onChange={handleEmail} />
                     <label className="text-gray-700 font-bold py-2" htmlFor="">Password</label>
                     <input className="text-gray-700 shadow border rounded border-gray-300 mb-3 py-1 px-3 focus:outline-none focus:shadow-outline"
-                        type="password" placeholder="********" value={password} onChange={handlePassword} />
+                        type={showPassword} placeholder="********" value={password} onChange={handlePassword} />
+                    <div>
+                        <span><input type="checkbox" name="showPassword" onClick={hidePassword} /> Show Password</span>
+                    </div>
                     <div className="grid grid-cols-2 gap-3 place-content-between my-4">
                         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded py-1 px-4 place-self-end" onClick={login}>
                             Sign In
                         </button>
                         <div className="text-sm text-blue-600 hover:text-blue-800 font-bold place-self-end">
-                            <NavLink to='/forgetPassword' className="text-indigo-500">Forgot Password ?</NavLink>
+                            <NavLink to='/updateInformation' className="text-indigo-500">Forgot Password ?</NavLink>
                         </div>
                     </div>
                     <div className="grid grid-cols-2 place-content-between my-4">

@@ -17,7 +17,7 @@ import Add from './components/Add'
 import Edit from './components/Edit'
 import Signup from './components/Signup'
 import Login from './components/Login'
-import ForgetPassword from './components/ForgetPassword'
+import UpdateInformation from './components/UpdateInformation'
 import Profile from './components/Profile'
 
 // css
@@ -66,8 +66,8 @@ function App() {
         <Route path='/login/*' element={
           <Login setLoginState={setLoginState} setLoginShow={setLoginShow} setLoginCredential={setLoginCredential} />
         } />
-        <Route path='/forgetPassword/*' element={<ForgetPassword />}  />
-        <Route path='/profile' element={<Profile loginState={loginState} />}  />
+        <Route path='/updateInformation/*' element={<UpdateInformation />}  />
+        <Route path='/profile/*' element={<Profile loginState={loginState} />}  />
       </Routes>
     </div>
   )

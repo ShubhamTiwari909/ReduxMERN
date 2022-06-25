@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Login from './Login'
-import { Routes, Route, NavLink,useNavigate } from 'react-router-dom'
+import { Routes, Route, NavLink, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { useSelector, useDispatch } from 'react-redux'
 import axios from 'axios'
@@ -10,6 +10,7 @@ function Signup() {
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState("password");
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -22,7 +23,7 @@ function Signup() {
     const users = useSelector((state) => state.signup);
     console.log(users);
     const navigation = useNavigate();
-    
+
     const hanldeEmail = (e) => {
         setEmail(e.target.value);
     };
@@ -33,6 +34,14 @@ function Signup() {
         setPassword(e.target.value);
     };
 
+    const hidePassword = () => {
+        if (showPassword === "password") {
+            setShowPassword("text")
+        }
+        else {
+            setShowPassword("password")
+        }
+    }
 
     //Registration function
     const register = (e) => {
@@ -80,10 +89,13 @@ function Signup() {
                                 name="email" value={users.email} onChange={hanldeEmail} />
                         </div>
 
-                        <div className="mt-4 relative">
+                        <div className="my-4 relative">
                             <span className="absolute p-1 bottom-8 ml-2 bg-white text-gray-400 ">Password</span>
-                            <input type="password" className="h-12 px-2 w-full border-2 rounded focus:outline-none focus:border-red-600"
+                            <input type={showPassword} className="h-12 px-2 w-full border-2 rounded focus:outline-none focus:border-red-600"
                                 name="password" value={users.password} onChange={hanldePassword} />
+                        </div>
+                        <div>
+                            <span><input type="checkbox" name="showPassword" onClick={hidePassword} /> Show Password</span>
                         </div>
 
                         <div className="mt-4 flex justify-center">

@@ -4,7 +4,7 @@
   "description": "",
   "main": "Queries.js",
   "scripts": {
-    "start":"node Queries.js",
+    "start": "node Queries.js",
     "dev": "nodemon ./Queries.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,6 +15,8 @@
     "cors": "^2.8.5",
     "express": "^4.18.1",
     "mongoose": "^6.4.0",
-    "nodemon": "^2.0.16"
+    "multer": "^1.4.5-lts.1",
+    "nodemon": "^2.0.16",
+    "uuid4": "^2.0.2"
   }
 }
