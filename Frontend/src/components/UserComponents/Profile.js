@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { BiShowAlt } from 'react-icons/bi'
-import './component.css'
+import '../component.css'
 function Profile() {
   const [showPassword, setShowPassword] = useState(false)
   const isShow = () => setShowPassword(!showPassword)

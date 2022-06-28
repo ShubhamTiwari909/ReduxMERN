@@ -4,8 +4,6 @@ const signupSchema = require("./Schema/SignupSchema");
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-
-
 const port = process.env.PORT || 3001;
 
 const app = express();

@@ -10,21 +10,23 @@ import axios from 'axios';
 import {useDispatch} from 'react-redux'
 
 // custom components
-import Navbar from './components/Navbar'
-import LandingPage from './components/LandingPage'
-import Home from './components/Home'
-import Add from './components/Add'
-import Edit from './components/Edit'
-import Signup from './components/Signup'
-import Login from './components/Login'
-import UpdateInformation from './components/UpdateInformation'
-import Profile from './components/Profile'
+//app components
+import Navbar from './components/AppComponents/Navbar'
+import LandingPage from './components/AppComponents/LandingPage'
+import Signup from './components/AppComponents/Signup'
+import Login from './components/AppComponents/Login'
+import UpdateInformation from './components/AppComponents/UpdateInformation'
+
+// user components
+import Home from './components/UserComponents/Home'
+import Add from './components/UserComponents/Add'
+import Edit from './components/UserComponents/Edit'
+import Profile from './components/UserComponents/Profile'
 
 // css
 import './App.css'
 
 function App() {
-  const [loginCredential, setLoginCredential] = useState("");
   const [loginState, setLoginState] = useState("");
   const [loginShow, setLoginShow] = useState(false);
   const [profile,setProfile] = useState("");
@@ -64,10 +66,10 @@ function App() {
           <Signup />
         } />
         <Route path='/login/*' element={
-          <Login setLoginState={setLoginState} setLoginShow={setLoginShow} setLoginCredential={setLoginCredential} />
+          <Login setLoginState={setLoginState} setLoginShow={setLoginShow}  />
         } />
         <Route path='/updateInformation/*' element={<UpdateInformation />}  />
-        <Route path='/profile/*' element={<Profile loginState={loginState} />}  />
+        <Route path='/profile' element={<Profile loginState={loginState} />}  />
       </Routes>
     </div>
   )

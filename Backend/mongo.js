@@ -7,7 +7,7 @@ module.exports = async () => {
   await mongoose.connect(Database, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-  });
+  })
   
   return mongoose
 };

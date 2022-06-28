@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { toast } from 'react-toastify'
 import { FcEditImage, FcDeleteDatabase } from 'react-icons/fc'
 import axios from 'axios'
-import './component.css'
+import {handleDelete} from './CRUDfunctions'
+import '../component.css'
 
 function Home(props) {
   const [data, setData] = useState([]);
@@ -12,7 +12,9 @@ function Home(props) {
   const [searchNumber, setSearchNumber] = useState("");
 
   const dispatch = useDispatch();
-
+  
+  const contacts = useSelector(state => state.contact);
+  
   useEffect(() => {
     axios.get(`http://localhost:3001/Users/${props.loginState}`)
       .then((response) => {
@@ -20,18 +22,8 @@ function Home(props) {
         dispatch({ type: "FETCH", payload: data })
       })
       .catch((err) => console.log(err));
-  }, [data, dispatch])
+  }, [data, dispatch,props.loginState])
 
-  
-
-  const contacts = useSelector(state => state.contact);
-
-  const deleteContact = (id) => {
-    if (window.confirm("Are you sure you want to delete this contact? \n press ok to delete and press cancel to cancel the operation ")) {
-      dispatch({ type: "DELETE_CONTACT", payload: id });
-      toast.success(("Contact deleted successfully"))
-    }
-  }
 
 
   return (
@@ -81,7 +73,7 @@ function Home(props) {
                     <Link to={`/edit/${contact._id}`} className="btn btn-small mr-2">
                       <FcEditImage size="1.5rem" />
                     </Link>
-                    <button className="btn btn-small" onClick={() => deleteContact(contact._id)}>
+                    <button className="btn btn-small" onClick={() => handleDelete(contact._id,dispatch)}>
                       <FcDeleteDatabase size="1.5rem" />
                     </button>
                   </div>
